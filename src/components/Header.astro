@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+import { nav, site } from "../data/site";
+import mark from "../assets/img/brand/mark-original.png";
+import styles from "./Header.module.css";
+
+const path = Astro.url.pathname;
+const isActive = (href?: string) =>
+  href && (href === "/" ? path === "/" : path.startsWith(href));
+---
+
+<header class={styles.siteHeader}>
+  <div class={styles.bar}>
+    <a href="/" class={styles.brand} aria-label={`${site.name} — Inicio`}>
+      <Image src={mark} alt="" width={160} height={160} class={styles.brandMark} />
+      <span class={styles.brandText}>
+        <span class={styles.brandKicker}>Asociación</span>
+        <span class={styles.brandName}>Procesión Infantil Tunja</span>
+      </span>
+    </a>
+
+    <nav class={styles.desktopNav} aria-label="Principal">
+      <ul>
+        <li>
+          <a href="/" class:list={[styles.top, { [styles.active]: path === "/" }]}>Inicio</a>
+        </li>
+        {
+          nav.map((item) =>
+            item.children ? (
+              <li class={styles.hasMenu}>
+                <button type="button" class={styles.top} aria-expanded="false" aria-haspopup="true">
+                  {item.label}
+                  <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+                    <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  </svg>
+                </button>
+                <ul class={styles.submenu}>
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={c.href} class:list={{ [styles.active]: isActive(c.href) }}>
+                        {c.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <a href={item.href} class:list={[styles.top, { [styles.active]: isActive(item.href) }]}>
+                  {item.label}
+                </a>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </nav>
+
+    <button
+      type="button"
+      class={styles.menuToggle}
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Menú móvil -->
+  <nav id="mobile-nav" class={styles.mobileNav} aria-label="Principal" hidden>
+    <ul>
+      <li><a href="/">Inicio</a></li>
+      {
+        nav.map((item) => (
+          <li>
+            {item.children ? (
+              <>
+                <span class={styles.mobileGroup}>{item.label}</span>
+                <ul>
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={c.href} class:list={{ [styles.active]: isActive(c.href) }}>
+                        {c.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <a href={item.href}>{item.label}</a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[aria-controls='mobile-nav']");
+  const mobileNav = document.getElementById("mobile-nav");
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    toggle.setAttribute("aria-label", open ? "Abrir menú" : "Cerrar menú");
+    if (mobileNav) mobileNav.hidden = open;
+  });
+</script>

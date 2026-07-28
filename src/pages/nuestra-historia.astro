@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Figure from "../components/Figure.astro";
+import historia from "../assets/img/content/historia.png";
+import styles from "./nuestra-historia.module.css";
+
+const hitos = [
+  {
+    year: "1958",
+    title: "La primera escena",
+    text: "El Domingo de Ramos, doña Julita y el padre Campoelías Monastoque organizan la primera procesión desde la Iglesia de Santa Bárbara hasta Santo Domingo, con una escena viva: la Entrada Triunfal de Jesús a Jerusalén, representada por niños —entre ellos sus hijos José Pastor y Gustavo Adolfo.",
+  },
+  {
+    year: "1959",
+    title: "Los primeros pasos",
+    text: "La Comunidad de Padres Dominicos aporta pequeñas imágenes que darían forma a los pasos de la procesión.",
+  },
+  {
+    year: "1960",
+    title: "Nace la tradición",
+    text: "El Jueves Santo, a las 11:00 a.m., se procesionan por primera vez en Tunja cerca de diez pasos en miniatura, replicando la tradición payanesa. La procesión parte de la Iglesia de Santa Clara y, desde entonces, los pasos se conservan en el Convento de Santa Clara.",
+  },
+];
+---
+
+<Layout
+  title="Nuestra Historia"
+  description="El origen de la Procesión Infantil de Tunja, relatado por su fundadora: de la primera escena en 1958 a los pasos de 1960."
+>
+  <PageHeader
+    eyebrow="La Procesión"
+    title="Nuestra Historia"
+    subtitle="Relato contado por la fundadora de la procesión"
+  />
+
+  <article class:list={[styles.article, "container-narrow"]}>
+    <div class="prose-liturgy">
+      <p class="dropcap">
+        Julita Angulo de Mejía concibió la idea de una procesión hecha por niños
+        y la compartió con el padre Campoelías Monastoque, párroco de la Iglesia
+        de Santa Bárbara. El sacerdote reconoció en ella un método catequético
+        eficaz para enseñar a los niños la Pasión, Muerte y Resurrección de
+        Cristo a través de escenas vivas.
+      </p>
+    </div>
+
+    <div class={styles.figureWrap}>
+      <Figure
+        src={historia}
+        alt="Fotografía histórica de la Procesión Infantil de Tunja"
+        caption="Los pasos en miniatura recorriendo Tunja"
+      />
+    </div>
+  </article>
+
+  <!-- Línea de tiempo -->
+  <section class={styles.timelineSection}>
+    <div class="container-narrow">
+      <p class="eyebrow" style="text-align:center">Del origen a la tradición</p>
+      <h2 class={styles.tlTitle}>Tres años que hicieron historia</h2>
+      <ol class={styles.timeline}>
+        {
+          hitos.map((h) => (
+            <li class={styles.tlItem}>
+              <div class={styles.tlYear}>{h.year}</div>
+              <div class={styles.tlBody}>
+                <h3>{h.title}</h3>
+                <p>{h.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class:list={["container-narrow", styles.closing]}>
+    <div class="rule-diamond" aria-hidden="true">✦</div>
+    <p>
+      La Asociación vela porque la devoción y tradición católica impulsada por la
+      fundadora en la Procesión Infantil del Jueves Santo continúe en la memoria
+      histórica y religiosa de la ciudad de Tunja.
+    </p>
+  </section>
+</Layout>

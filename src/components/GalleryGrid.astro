@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import styles from "./GalleryGrid.module.css";
+
+interface Props {
+  images: { src: ImageMetadata; alt: string }[];
+}
+const { images } = Astro.props;
+---
+
+<div class={styles.masonry}>
+  {
+    images.map((img, i) => (
+      <figure class={styles.tile} style={`--i:${i}`}>
+        <Image
+          src={img.src}
+          alt={img.alt}
+          widths={[320, 520, 720]}
+          sizes="(min-width: 900px) 22rem, (min-width: 600px) 45vw, 92vw"
+          loading={i < 4 ? "eager" : "lazy"}
+        />
+      </figure>
+    ))
+  }
+</div>

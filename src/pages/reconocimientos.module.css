@@ -1,0 +1,43 @@
+.rec {
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+.rec-grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+.rec-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+.rec-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--color-stone-line);
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+.rec-list li:last-child {
+  border-bottom: 0;
+}
+.medal {
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.rec-figure {
+  position: sticky;
+  top: 6rem;
+}
+@media (min-width: 900px) {
+  .rec-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3.5rem;
+  }
+}

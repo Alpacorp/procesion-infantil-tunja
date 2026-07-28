@@ -1,0 +1,90 @@
+.article {
+  padding-block: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+}
+.figure-wrap {
+  margin-top: 2.5rem;
+}
+
+.timeline-section {
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+.tl-title {
+  text-align: center;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  margin: 0.4rem 0 2.5rem;
+}
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 3.5rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: var(--color-stone-line);
+}
+.tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1.5rem;
+  padding-bottom: 2.25rem;
+}
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+.tl-year {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-crimson);
+  text-align: right;
+  position: relative;
+  z-index: 1;
+}
+.tl-body {
+  position: relative;
+}
+.tl-body::before {
+  content: "";
+  position: absolute;
+  left: -2.05rem;
+  top: 0.55rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 4px var(--color-parchment);
+}
+.tl-body h3 {
+  font-size: 1.4rem;
+  color: var(--color-crimson-deep);
+  margin: 0 0 0.4rem;
+}
+.tl-body p {
+  margin: 0;
+  color: var(--color-ink-soft);
+}
+
+.closing {
+  text-align: center;
+  padding-bottom: 3rem;
+}
+.closing :global(.rule-diamond) {
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+}
+.closing p {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--color-ink-soft);
+  max-width: 52ch;
+  margin: 0 auto;
+  line-height: 1.5;
+}

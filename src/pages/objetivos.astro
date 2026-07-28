@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import styles from "./objetivos.module.css";
+
+const objetivos = [
+  "Organizar la Procesión Infantil del Jueves Santo para fomentar los valores cristianos y el sentido de comunidad entre niños, adultos, clero y fieles, continuando la tradición iniciada por Julita Angulo de Mejía en 1960.",
+  "Presentar, a través de los pasos de la procesión y de escenas vivas con trajes de época, los momentos fundamentales de la fe católica.",
+  "Formar a los niños mediante la pedagogía y lúdica de la fe en el simbolismo y la doctrina católicos.",
+  "Emplear la procesión como método de catequesis para la formación religiosa de los niños y su participación en la Iglesia.",
+  "Fortalecer la devoción a los misterios de la Pasión y Muerte de Cristo.",
+  "Promover el desarrollo moral, religioso, cultural y educativo de los miembros y sus familias.",
+  "Celebrar la Semana Santa con dignidad y solemnidad, en el seno de la familia y la comunidad.",
+  "Participar en las procesiones de Semana Santa mediante la presentación artística de los pasos de la procesión infantil.",
+  "Convocar a los miembros a la fraternidad, según las enseñanzas del Evangelio sobre la ayuda entre hermanos.",
+];
+---
+
+<Layout
+  title="Nuestros Objetivos"
+  description="Los nueve objetivos de la Asociación Procesión Infantil Tunja."
+>
+  <PageHeader
+    eyebrow="Nosotros"
+    title="Nuestros Objetivos"
+    subtitle="Nueve propósitos que guían nuestra labor"
+  />
+
+  <section class:list={[styles.obj, "container"]}>
+    <ol class={styles.objList}>
+      {
+        objetivos.map((o, i) => (
+          <li class={styles.objItem}>
+            <span class={styles.objNum}>{String(i + 1).padStart(2, "0")}</span>
+            <p>{o}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Layout>

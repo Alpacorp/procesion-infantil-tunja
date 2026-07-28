@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Figure from "../components/Figure.astro";
+import img1 from "../assets/img/content/acompanamientos-1.png";
+import img2 from "../assets/img/content/acompanamientos-2.png";
+import styles from "./acompanamientos.module.css";
+
+const bandas = [
+  "Banda del Gimnasio Santander",
+  "Banda Infantil Colegio Pestalozzi",
+  "Banda Infantil Jardín Mi Casita",
+  "Banda Marcial Liceo San Francisco",
+  "Banda Infantil Liceo Santiago de Tunja",
+  "Banda Marcial del Colegio Jean Comenius",
+  "Banda Juvenil del Colegio INEM",
+  "Banda del Colegio Sagrado Corazón",
+  "Banda Marcial del Colegio Gustavo Rojas Pinilla",
+  "Banda Marcial de la Policía Nacional",
+  "Banda de Músicos del Ejército Nacional",
+  "Banda del Colegio Gabriel García Márquez",
+  "Banda del Colegio Coopteboy",
+  "Banda Músico-Marcial I. E. Técnica La Libertad",
+  "Banda Marcial del Ejército Nacional",
+];
+
+const especiales = [
+  "Autoridades Eclesiásticas",
+  "Autoridades Civiles",
+  "Autoridades Militares",
+  "Bomberos",
+  "Defensa Civil",
+  "Cruz Roja",
+  "Grupo Scout",
+];
+---
+
+<Layout
+  title="Acompañamientos"
+  description="Bandas marciales y musicales, autoridades e instituciones que acompañan la Procesión Infantil de Tunja."
+>
+  <PageHeader
+    eyebrow="La Procesión"
+    title="Acompañamientos"
+    subtitle="La ciudad entera marcha junto a los niños"
+  />
+
+  <section class:list={[styles.intro, "container-narrow"]}>
+    <div class="prose-liturgy">
+      <p class="dropcap">
+        Durante el recorrido, la Procesión es acompañada por bandas marciales y
+        de música, infantiles y juveniles, de las diferentes instituciones
+        educativas de Tunja, así como por bandas de adultos del Ejército y la
+        Policía Nacional.
+      </p>
+    </div>
+  </section>
+
+  <section class={styles.bands}>
+    <div class="container">
+      <p class="eyebrow" style="text-align:center">Acompañamientos musicales</p>
+      <h2 class={styles.secTitle}>Las bandas de la procesión</h2>
+      <ul class={styles.bandGrid}>
+        {bandas.map((b) => <li>{b}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class:list={["container", styles.mediaRow]}>
+    <Figure src={img1} alt="Bandas acompañando la Procesión Infantil de Tunja" />
+    <Figure src={img2} alt="Acompañamiento musical durante el recorrido" />
+  </section>
+
+  <section class={styles.special}>
+    <div class="container-narrow">
+      <p class="eyebrow" style="text-align:center">Acompañamientos especiales</p>
+      <h2 class={styles.secTitle}>Autoridades e instituciones</h2>
+      <ul class={styles.chipList}>
+        {especiales.map((e) => <li>{e}</li>)}
+      </ul>
+    </div>
+  </section>
+</Layout>

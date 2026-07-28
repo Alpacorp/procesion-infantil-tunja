@@ -1,0 +1,73 @@
+.post-head {
+  background: var(--color-crimson-deep);
+  color: var(--color-parchment);
+  border-bottom: 3px solid var(--color-gold);
+}
+.ph-inner {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.5rem) 1.25rem clamp(1.75rem, 4vw, 2.75rem);
+}
+.back {
+  color: var(--color-gold-soft);
+  text-decoration: none;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+.back:hover {
+  color: var(--color-gold-pale);
+}
+.post-cat {
+  color: var(--color-gold-soft);
+  margin: 0 0 0.75rem;
+}
+.post-head h1 {
+  color: var(--color-parchment);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: 0 0 0.75rem;
+}
+.post-head time {
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-parchment) 75%, transparent);
+}
+
+.post-cover {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+.post-cover img {
+  width: 100%;
+  height: auto;
+  max-height: 34rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-stone-line);
+  box-shadow: var(--shadow-soft);
+}
+
+.post-body {
+  padding-block: clamp(2rem, 5vw, 3rem);
+}
+.post-body :global(h2) {
+  font-size: 1.7rem;
+  color: var(--color-crimson);
+  margin: 2rem 0 0.75rem;
+}
+.post-body :global(blockquote) {
+  margin: 1.5rem 0;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  border-left: 3px solid var(--color-gold);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+.post-body :global(a) {
+  color: var(--color-crimson);
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold-soft);
+  text-underline-offset: 3px;
+}
+.post-foot {
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+}

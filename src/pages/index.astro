@@ -1,0 +1,190 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { contact } from "../data/site";
+import heroImg from "../assets/img/content/pi2.jpg";
+import fundadoraImg from "../assets/img/content/fundadora.png";
+import historiaImg from "../assets/img/content/historia.png";
+import recorridoImg from "../assets/img/content/recorrido.png";
+import g1 from "../assets/img/gallery/g02.jpg";
+import g2 from "../assets/img/gallery/g03.jpg";
+import g3 from "../assets/img/gallery/g04.jpg";
+import g4 from "../assets/img/gallery/g05.png";
+import styles from "./index.module.css";
+
+const secciones = [
+  {
+    href: "/nuestra-fundadora/",
+    title: "Nuestra Fundadora",
+    text: "Julita Angulo de Mejía, alma y origen de la tradición.",
+    img: fundadoraImg,
+  },
+  {
+    href: "/nuestra-historia/",
+    title: "Nuestra Historia",
+    text: "De la primera escena en 1958 a los pasos de 1960.",
+    img: historiaImg,
+  },
+  {
+    href: "/recorrido/",
+    title: "El Recorrido",
+    text: "El camino por la Tunja colonial cada Jueves Santo.",
+    img: recorridoImg,
+  },
+];
+
+const galeria = [g1, g2, g3, g4];
+
+const eventSchema = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: "Procesión Infantil del Jueves Santo",
+  description:
+    "Procesión en la que niños personifican la Pasión de Cristo por el centro histórico de Tunja cada Jueves Santo, tradición viva desde 1960.",
+  startDate: "2026-04-02T11:00:00-05:00",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  location: {
+    "@type": "Place",
+    name: "Iglesia de Santa Clara, Tunja",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tunja",
+      addressRegion: "Boyacá",
+      addressCountry: "CO",
+    },
+  },
+  organizer: { "@id": "https://procesioninfantiltunja.com/#organizacion" },
+  isAccessibleForFree: true,
+};
+---
+
+<Layout
+  description="La Procesión Infantil del Jueves Santo: niños que personifican la Pasión de Cristo por la Tunja colonial. Una tradición católica viva desde 1960."
+  schema={eventSchema}
+>
+  <!-- HERO -->
+  <section class={styles.hero}>
+    <div class={styles.sunburstWrap} aria-hidden="true"><div class="sunburst"></div></div>
+    <div class={styles.heroGrid}>
+      <div class={styles.heroCopy}>
+        <p class:list={["eyebrow", styles.heroEyebrow]}>Asociación · Jueves Santo · Tunja</p>
+        <h1>La demostración de fe más querida de <em>Tunja</em></h1>
+        <p class={styles.heroLead}>
+          Cada Jueves Santo, decenas de niños dan vida a la Pasión de Cristo por
+          las calles coloniales de Tunja. Una tradición viva desde 1960.
+        </p>
+        <div class={styles.heroActions}>
+          <a href="/nuestra-historia/" class="btn btn-primary">Nuestra Historia</a>
+          <a href="/recorrido/" class="btn btn-ghost">Ver el recorrido</a>
+        </div>
+      </div>
+
+      <figure class={styles.heroFigure}>
+        <Image
+          src={heroImg}
+          alt="Niños personificando la Procesión Infantil por las calles de Tunja"
+          widths={[420, 640, 900]}
+          sizes="(min-width: 940px) 40vw, 90vw"
+          class={styles.heroImg}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </figure>
+    </div>
+
+    <!-- Ficha del evento, tipo placa grabada -->
+    <dl class={styles.eventPlate}>
+      <div><dt>Desde</dt><dd>1960</dd></div>
+      <div><dt>Cada</dt><dd>Jueves Santo</dd></div>
+      <div><dt>Sale de</dt><dd>Iglesia de Santa Clara</dd></div>
+      <div><dt>Hora</dt><dd>11:00 a.m.</dd></div>
+    </dl>
+  </section>
+
+  <!-- NUESTRA LABOR -->
+  <section class:list={[styles.labor, "container-narrow"]}>
+    <p class="eyebrow" style="text-align:center">Nuestra Labor</p>
+    <h2 class={styles.laborTitle}>Trabajamos con el corazón</h2>
+    <div class:list={["prose-liturgy", styles.laborProse]}>
+      <p class="dropcap">
+        La Asociación Procesión Infantil Tunja vela porque la devoción y la
+        tradición católica impulsada por nuestra fundadora, Julita Angulo de
+        Mejía, en la Procesión Infantil del Jueves Santo, continúe viva en la
+        memoria histórica y religiosa de la ciudad de Tunja.
+      </p>
+      <p>
+        A través de la <em>pedagogía y lúdica de la fe</em>, los niños encarnan
+        con trajes de época las escenas de la Pasión, Muerte y Resurrección de
+        Cristo, aprendiendo la doctrina y el símbolo católicos mientras la
+        ciudad entera se reúne en oración y comunidad.
+      </p>
+    </div>
+    <div class:list={["rule-diamond", styles.laborRule]} aria-hidden="true">✦</div>
+  </section>
+
+  <!-- SECCIONES -->
+  <section class:list={[styles.secciones, "container"]}>
+    <div class={styles.secHead}>
+      <p class="eyebrow">Conoce la tradición</p>
+      <h2>Un legado en cada paso</h2>
+    </div>
+    <div class={styles.secGrid}>
+      {
+        secciones.map((s) => (
+          <a href={s.href} class={styles.secCard}>
+            <div class={styles.secImg}>
+              <Image src={s.img} alt="" widths={[320, 520]} sizes="(min-width:720px) 30vw, 90vw" />
+            </div>
+            <div class={styles.secBody}>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              <span class={styles.secMore}>Leer más →</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- GALERÍA TEASER -->
+  <section class={styles.galTeaser}>
+    <div class="container">
+      <div class={styles.galHead}>
+        <div>
+          <p class="eyebrow">Recorrido Visual Histórico</p>
+          <h2>Seis décadas en imágenes</h2>
+        </div>
+        <a href="/galeria/" class="btn btn-outline">Ver la galería</a>
+      </div>
+      <div class={styles.galGrid}>
+        {
+          galeria.map((img, i) => (
+            <div class:list={[styles.galItem, { [styles.tall]: i % 2 === 1 }]}>
+              <Image src={img} alt="Fotografía histórica de la Procesión Infantil" widths={[300, 520]} sizes="(min-width:720px) 24vw, 45vw" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACTO -->
+  <section class={styles.cta}>
+    <div class={styles.sunburstWrap} aria-hidden="true"><div class="sunburst"></div></div>
+    <div class={styles.ctaInner}>
+      <p class="eyebrow" style="color:var(--color-gold-soft)">Ubícanos</p>
+      <h2>Visítanos en el corazón colonial de Tunja</h2>
+      <p class={styles.ctaAddr}>{contact.address}</p>
+      <div class={styles.heroActions} style="justify-content:center">
+        <a href={`mailto:${contact.email}`} class="btn btn-primary">Escríbenos</a>
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${contact.mapsQuery}`}
+          target="_blank"
+          rel="noopener"
+          class="btn btn-ghost">Cómo llegar ↗</a
+        >
+      </div>
+    </div>
+  </section>
+</Layout>

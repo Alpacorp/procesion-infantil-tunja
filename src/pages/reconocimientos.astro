@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Figure from "../components/Figure.astro";
+import reconocimientos from "../assets/img/content/reconocimientos.png";
+import styles from "./reconocimientos.module.css";
+
+const distinciones = [
+  "Condecoración del Congreso de la República",
+  "Condecoración de la Asamblea de Boyacá",
+  "Condecoración de la Alcaldía Mayor de Tunja",
+  "Escultura del Gimnasio Santander",
+  "Medalla al Mérito «Cacique de Turmequé» — Clase Única, otorgada por el Centro de Estudios Históricos para los Derechos Humanos «Diego de Torres y Moyachoque»",
+  "Comunicación de felicitación del Consejo General de Hermandades y Cofradías de Sevilla, España",
+  "Pergamino de reconocimiento de la Familia Payanesa Canencio Sánchez",
+  "Comunicación de felicitación de la Fundación Cultural Pedro Antonio Paz Rebolledo de Popayán",
+];
+---
+
+<Layout
+  title="Reconocimientos"
+  description="Distinciones y condecoraciones recibidas por la Asociación Procesión Infantil Tunja a lo largo de su historia."
+>
+  <PageHeader
+    eyebrow="Nosotros"
+    title="Reconocimientos"
+    subtitle="Distinciones que honran una tradición de más de seis décadas"
+  />
+
+  <section class:list={[styles.rec, "container"]}>
+    <div class={styles.recGrid}>
+      <ul class={styles.recList}>
+        {
+          distinciones.map((d) => (
+            <li>
+              <span class={styles.medal} aria-hidden="true">✦</span>
+              <span>{d}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div class={styles.recFigure}>
+        <Figure
+          src={reconocimientos}
+          alt="Reconocimiento otorgado a la Procesión Infantil de Tunja"
+        />
+      </div>
+    </div>
+  </section>
+</Layout>

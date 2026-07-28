@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+/* Las fuentes se autohospedan vía la API de fuentes de Astro
+   (configurada en astro.config.mjs) con preload y fallback ajustado. */
+
+/* ── Sistema de diseño ──────────────────────────────────────────────
+   Derivado del emblema de la Asociación: sol dorado de retablo +
+   monograma IHS carmesí de la Pasión, sobre piedra caliza / pergamino.
+   ------------------------------------------------------------------- */
+@theme {
+  /* Color */
+  --color-ink: #23181a; /* texto — negro cálido aborgoñado */
+  --color-ink-soft: #4a3b3a;
+  --color-crimson: #6e1f2a; /* carmesí de la Pasión — color primario */
+  --color-crimson-deep: #4a141c; /* superficies profundas (hero/footer) */
+  --color-crimson-bright: #8f2733;
+  --color-gold: #b0873f; /* oro de retablo — acento y filetes */
+  --color-gold-soft: #cda24e;
+  --color-gold-pale: #e6d3a3;
+  --color-parchment: #f4eddd; /* fondo de página */
+  --color-parchment-2: #ece1c9; /* secciones alternas / tarjetas */
+  --color-stone: #8a7b6b; /* marrón-gris apagado — bordes/pies */
+  --color-stone-line: #d9ccb2; /* filetes suaves */
+
+  /* Tipografía — variables generadas por la API de fuentes de Astro */
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-hanken);
+
+  /* Radios y sombras — discretos, tono documento */
+  --radius-sm: 2px;
+  --radius: 4px;
+  --shadow-soft: 0 1px 2px rgba(35, 24, 26, 0.06), 0 8px 24px rgba(35, 24, 26, 0.08);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--color-crimson-deep);
+}
+
+/* Transiciones suaves entre páginas (mejora progresiva) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root) {
+    animation: 0.28s ease both vt-fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 0.34s ease both vt-fade-in;
+  }
+  @keyframes vt-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes vt-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+}
+
+/* Enfoque visible accesible */
+:focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-gold-pale);
+  color: var(--color-crimson-deep);
+}
+
+/* ── Utilidades de composición ─────────────────────────────────────── */
+
+/* Etiqueta versalita tipo inscripción tallada */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Filete con rombo central (divisor litúrgico) */
+.rule-diamond {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-gold);
+}
+.rule-diamond::before,
+.rule-diamond::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to var(--dir, right),
+    transparent,
+    var(--color-stone-line)
+  );
+}
+
+/* Sol radiante del emblema — motivo de firma, en cónico dorado */
+.sunburst {
+  background-image: repeating-conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--color-gold) 22%, transparent) 0deg 2.6deg,
+    transparent 2.6deg 8deg
+  );
+  -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent 72%);
+  mask-image: radial-gradient(closest-side, #000 30%, transparent 72%);
+}
+
+/* Contenedor de lectura */
+.prose-liturgy p {
+  margin-block: 0 1.15em;
+  max-width: 68ch;
+}
+.prose-liturgy p:first-of-type {
+  font-size: 1.18rem;
+  color: var(--color-ink-soft);
+}
+.prose-liturgy .dropcap::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.4em;
+  line-height: 0.7;
+  float: left;
+  margin: 0.05em 0.12em 0 0;
+  color: var(--color-crimson);
+  font-weight: 600;
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn-primary {
+  background: var(--color-gold);
+  color: var(--color-crimson-deep);
+  border-color: var(--color-gold);
+}
+.btn-primary:hover {
+  background: var(--color-gold-soft);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-parchment);
+  border-color: color-mix(in srgb, var(--color-gold) 55%, transparent);
+}
+.btn-ghost:hover {
+  border-color: var(--color-gold-soft);
+  color: var(--color-gold-soft);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--color-crimson);
+  border-color: var(--color-gold);
+}
+.btn-outline:hover {
+  background: var(--color-crimson);
+  color: var(--color-parchment);
+  border-color: var(--color-crimson);
+}
+
+/* Contenedor estándar */
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-inline: 1.25rem;
+}
+.container-narrow {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-inline: 1.25rem;
+}
+
+/* Enlaces dentro de contenido */
+.link-gold {
+  color: var(--color-crimson);
+  text-decoration: underline;
+  text-decoration-color: var(--color-gold-soft);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.link-gold:hover {
+  color: var(--color-crimson-bright);
+}

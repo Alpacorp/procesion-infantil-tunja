@@ -1,0 +1,54 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { Image } from "astro:assets";
+import fundadora from "../assets/img/content/fundadora.png";
+import styles from "./nuestra-fundadora.module.css";
+---
+
+<Layout
+  title="Nuestra Fundadora"
+  description="Julita Angulo de Mejía, fundadora de la Procesión Infantil del Jueves Santo de Tunja."
+>
+  <PageHeader eyebrow="La Procesión" title="Nuestra Fundadora" />
+
+  <article class:list={[styles.article, "container"]}>
+    <div class={styles.artGrid}>
+      <div class={styles.artFigure}>
+        <Image
+          src={fundadora}
+          alt="Doña Julita Angulo de Mejía, fundadora de la Procesión Infantil"
+          widths={[320, 520, 700]}
+          sizes="(min-width: 900px) 22rem, 80vw"
+        />
+        <p class={styles.figCap}>Julita Angulo de Mejía · Popayán, 1922</p>
+      </div>
+
+      <div class="prose-liturgy">
+        <p class="dropcap">
+          Doña Julita Angulo de Mejía nació el 5 de febrero de 1922 en Popayán.
+          Desde muy temprana edad demostró un profundo humanismo y una religiosidad
+          católica que marcaría toda su vida, cultivando además las artes manuales
+          y las labores de protección social y turismo.
+        </p>
+        <p>
+          Contrajo matrimonio con el doctor Carlos José Mejía Rodríguez, médico
+          veterinario y zootecnista. Tuvieron cuatro hijos y establecieron su
+          hogar en Tunja, ciudad donde Julita se distinguió por su espíritu de
+          servicio y su bondad con los menos favorecidos.
+        </p>
+        <p>
+          Colaboró con obras como El Amparo del Niño, las Damas Rosadas y la
+          Legión de María, entre muchas otras. Pero su legado más perdurable es
+          la <strong>Procesión Infantil del Jueves Santo</strong>, que desde 1960
+          se celebra ininterrumpidamente en Tunja.
+        </p>
+
+        <blockquote class={styles.pull}>
+          Su obra continúa viva en la memoria histórica y religiosa de Tunja,
+          transmitida de generación en generación cada Semana Santa.
+        </blockquote>
+      </div>
+    </div>
+  </article>
+</Layout>

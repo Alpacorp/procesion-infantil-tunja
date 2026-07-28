@@ -1,0 +1,19 @@
+---
+import styles from "./PageHeader.module.css";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+}
+const { eyebrow, title, subtitle } = Astro.props;
+---
+
+<header class={styles.pageHeader}>
+  <div class={styles.sunburstWrap} aria-hidden="true"><div class="sunburst"></div></div>
+  <div class={styles.phInner}>
+    {eyebrow && <p class:list={["eyebrow", styles.phEyebrow]}>{eyebrow}</p>}
+    <h1>{title}</h1>
+    {subtitle && <p class={styles.phSub}>{subtitle}</p>}
+  </div>
+</header>

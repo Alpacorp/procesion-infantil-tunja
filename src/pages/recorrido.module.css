@@ -1,0 +1,77 @@
+.intro {
+  padding-block: clamp(2.5rem, 6vw, 4rem) 1rem;
+}
+.route {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+.route-title {
+  text-align: center;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  margin: 0.4rem 0 2.5rem;
+}
+.stations {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 40rem;
+  position: relative;
+}
+.stations::before {
+  content: "";
+  position: absolute;
+  left: 1.4rem;
+  top: 1.4rem;
+  bottom: 1.4rem;
+  width: 2px;
+  background: repeating-linear-gradient(
+    var(--color-gold) 0 6px,
+    transparent 6px 12px
+  );
+  opacity: 0.6;
+}
+.station {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.55rem 0;
+  position: relative;
+}
+.st-num {
+  flex: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-parchment);
+  border: 1.5px solid var(--color-gold);
+  color: var(--color-crimson);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+.station:first-child .st-num,
+.station:last-child .st-num {
+  background: var(--color-crimson);
+  color: var(--color-parchment);
+  border-color: var(--color-crimson);
+}
+.st-body {
+  display: flex;
+  flex-direction: column;
+}
+.st-lugar {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-crimson-deep);
+  line-height: 1.15;
+}
+.st-nota {
+  font-size: 0.85rem;
+  color: var(--color-stone);
+}
+.media {
+  padding-block: 1.5rem clamp(2.5rem, 6vw, 4rem);
+}

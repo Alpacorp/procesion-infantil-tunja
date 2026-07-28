@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Figure from "../components/Figure.astro";
+import recorrido from "../assets/img/content/recorrido.png";
+import styles from "./recorrido.module.css";
+
+const paradas = [
+  { lugar: "Iglesia de Santa Clara", nota: "Punto de partida · 11:00 a.m." },
+  { lugar: "Templo de Santo Domingo", nota: "Pasa por el frente" },
+  { lugar: "Calle 18", nota: "Baja hasta la carrera 10" },
+  { lugar: "Iglesia de San Ignacio", nota: "Hacia la Plaza de Bolívar" },
+  { lugar: "Plaza de Bolívar", nota: "Alcaldía Mayor de Tunja" },
+  { lugar: "Catedral de Tunja", nota: "Frente a la Gobernación" },
+  { lugar: "Club Boyacá", nota: "Carrera 10 hasta la calle 21" },
+  { lugar: "Cámara de Comercio", nota: "Sube de regreso" },
+  { lugar: "Iglesia de Santa Clara", nota: "Regreso · fin del recorrido" },
+];
+---
+
+<Layout
+  title="El Recorrido"
+  description="El camino de la Procesión Infantil cada Jueves Santo por el centro histórico de Tunja, desde la Iglesia de Santa Clara."
+>
+  <PageHeader
+    eyebrow="La Procesión"
+    title="El Recorrido"
+    subtitle="El camino de la fe por la Tunja colonial, cada Jueves Santo"
+  />
+
+  <section class:list={[styles.intro, "container-narrow"]}>
+    <div class="prose-liturgy">
+      <p class="dropcap">
+        La Procesión Infantil sale de la Iglesia de Santa Clara todos los Jueves
+        Santos a las 11:00 a.m. Pasa por el frente del templo de Santo Domingo
+        hasta encontrar la calle 18; baja por esta hasta la carrera 10, pasa por
+        la Iglesia de San Ignacio hacia la Plaza de Bolívar, la Alcaldía Mayor de
+        Tunja, la Catedral, la Gobernación y el Club Boyacá. Continúa por la
+        carrera 10 hasta la calle 21, la Cámara de Comercio, y sube por esta
+        hasta regresar a la Iglesia de Santa Clara.
+      </p>
+    </div>
+  </section>
+
+  <section class={styles.route}>
+    <div class="container">
+      <p class="eyebrow" style="text-align:center">Paso a paso</p>
+      <h2 class={styles.routeTitle}>Las estaciones del recorrido</h2>
+      <ol class={styles.stations}>
+        {
+          paradas.map((p, i) => (
+            <li class={styles.station}>
+              <span class={styles.stNum}>{i + 1}</span>
+              <span class={styles.stBody}>
+                <span class={styles.stLugar}>{p.lugar}</span>
+                <span class={styles.stNota}>{p.nota}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class:list={["container", styles.media]}>
+    <Figure
+      src={recorrido}
+      alt="La Procesión Infantil recorriendo el centro histórico de Tunja"
+      caption="La procesión avanza por el centro histórico de Tunja"
+    />
+  </section>
+</Layout>

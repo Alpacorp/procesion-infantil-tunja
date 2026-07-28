@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { getCollection } from "astro:content";
+import styles from "./index.module.css";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Layout
+  title="Blog"
+  description="Noticias, celebraciones y vida de la Asociación Procesión Infantil Tunja y la comunidad de las Hermanas Clarisas."
+>
+  <PageHeader
+    eyebrow="Actualidad"
+    title="Blog"
+    subtitle="Noticias y celebraciones de la procesión y de la comunidad"
+  />
+
+  <section class:list={[styles.blog, "container"]}>
+    {
+      posts.length === 0 ? (
+        <p class={styles.empty}>Pronto publicaremos nuestras primeras noticias.</p>
+      ) : (
+        <ul class={styles.postGrid}>
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`} class={styles.postCard}>
+                {post.data.cover && (
+                  <div class={styles.pcImg}>
+                    <img src={post.data.cover} alt="" loading="lazy" />
+                  </div>
+                )}
+                <div class={styles.pcBody}>
+                  <span class={styles.pcCat}>{post.data.category}</span>
+                  <h2>{post.data.title}</h2>
+                  <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+                  {post.data.excerpt && <p>{post.data.excerpt}</p>}
+                  <span class={styles.pcMore}>Leer más →</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Layout>

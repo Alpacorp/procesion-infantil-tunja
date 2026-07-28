@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import { nav, contact, site } from "../data/site";
+import mark from "../assets/img/brand/mark-original.png";
+import styles from "./Footer.module.css";
+
+const year = 2026;
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${contact.mapsQuery}`;
+---
+
+<footer class={styles.siteFooter} id="ubicanos">
+  <div class={styles.sunburstWrap} aria-hidden="true">
+    <div class="sunburst"></div>
+  </div>
+
+  <div class={styles.inner}>
+    <div class:list={[styles.col, styles.brandCol]}>
+      <Image src={mark} alt="" width={296} height={296} class={styles.fmark} />
+      <p class={styles.fname}>{site.name}</p>
+      <p class={styles.ftag}>Jueves Santo · Tunja, Boyacá · desde {site.founded}</p>
+    </div>
+
+    <nav class:list={[styles.col, styles.links]} aria-label="Pie de página">
+      {
+        nav
+          .filter((group) => group.children)
+          .map((group) => (
+            <div class={styles.linkGroup}>
+              <h3>{group.label}</h3>
+              <ul>
+                {group.children?.map((c) => (
+                  <li>
+                    <a href={c.href}>{c.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+      }
+    </nav>
+
+    <address class:list={[styles.col, styles.contact]}>
+      <h3>Ubícanos</h3>
+      <p>{contact.address}</p>
+      <p>
+        {
+          contact.phones.map((p, i) => (
+            <>
+              <a href={`tel:+57${p.replace(/\s/g, "")}`}>{p}</a>
+              {i < contact.phones.length - 1 ? " · " : null}
+            </>
+          ))
+        }
+      </p>
+      <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+      <p>
+        <a href={mapsUrl} target="_blank" rel="noopener" class={styles.maplink}>
+          Ver en el mapa ↗
+        </a>
+      </p>
+    </address>
+  </div>
+
+  <div class={styles.baseline}>
+    <span>© {year} {site.name} · Colombia</span>
+    <span class={styles.motto}>Ad maiorem Dei gloriam</span>
+  </div>
+</footer>

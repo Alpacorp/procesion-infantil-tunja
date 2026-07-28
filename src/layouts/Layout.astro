@@ -1,0 +1,108 @@
+---
+import "../styles/global.css";
+import { Font } from "astro:assets";
+import styles from "./Layout.module.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site, contact } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  schema?: object | object[];
+}
+
+const {
+  title,
+  description = site.description,
+  image = "/og-image.jpg",
+  schema,
+} = Astro.props;
+
+const pageTitle = title ? `${title} — ${site.shortName}` : `${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+// Datos estructurados base (schema.org) — presentes en todo el sitio
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "NGO"],
+  "@id": `${site.url}/#organizacion`,
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.url,
+  logo: `${site.url}/favicon.png`,
+  foundingDate: String(site.founded),
+  description: site.description,
+  email: contact.email,
+  telephone: `+57${contact.phones[0].replace(/\s/g, "")}`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Calle 20 # 10-87",
+    addressLocality: "Tunja",
+    addressRegion: "Boyacá",
+    postalCode: "150001",
+    addressCountry: "CO",
+  },
+};
+const siteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  name: site.name,
+  url: site.url,
+  inLanguage: "es-CO",
+  publisher: { "@id": `${site.url}/#organizacion` },
+};
+const schemas = [orgSchema, siteSchema, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <Font cssVariable="--font-cormorant" preload />
+    <Font cssVariable="--font-hanken" preload />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta name="theme-color" content="#4a141c" />
+
+    <!-- Open Graph / redes -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {
+      schemas.map((s) => (
+        <script type="application/ld+json" set:html={JSON.stringify(s)} />
+      ))
+    }
+  </head>
+  <body>
+    <a href="#contenido" class={styles.skipLink}>Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

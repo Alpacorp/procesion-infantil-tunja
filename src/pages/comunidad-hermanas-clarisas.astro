@@ -1,0 +1,169 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { Image } from "astro:assets";
+import santaClara from "../assets/img/clarisas/santa-clara.jpeg";
+import monasterio1 from "../assets/img/clarisas/monasterio-1.jpeg";
+import monasterio2 from "../assets/img/clarisas/monasterio-2.jpeg";
+import monasterio3 from "../assets/img/clarisas/monasterio-3.jpeg";
+import papaFrancisco from "../assets/img/clarisas/papa-francisco.webp";
+import styles from "./comunidad-hermanas-clarisas.module.css";
+
+const primerasReligiosas = [
+  "Sor Juana de Jesús (fundadora y primera abadesa)",
+  "Sor Juana de la Cruz",
+  "Sor Catalina de Jesús",
+  "Sor Isabel del Espíritu Santo",
+  "Sor Ana de Santa Clara",
+  "Sor Ana de la Cruz",
+  "Sor María de Jesús",
+  "Sor Juana de los Ángeles",
+  "Sor Isabel de San Miguel",
+  "Sor Isabel de la Concepción",
+];
+---
+
+<Layout
+  title="Comunidad Hermanas Clarisas"
+  description="La Comunidad de las Hermanas Clarisas de Tunja: Santa Clara de Asís, la historia del Protomonasterio fundado en 1573 y su año jubilar por los 450 años."
+>
+  <PageHeader
+    eyebrow="Nuestra Comunidad"
+    title="Hermanas Clarisas"
+    subtitle="Vida contemplativa en el corazón de Tunja desde 1573"
+  />
+
+  <!-- Jubileo -->
+  <section class:list={[styles.jubileo, "container-narrow"]}>
+    <div class="prose-liturgy">
+      <p class="dropcap">
+        Las Hermanas Clarisas compartimos la alegría del Jubileo otorgado por la
+        Santa Sede con motivo de los <strong>450 años de fundación del
+        Monasterio</strong>, el 7 de marzo de 2023. Custodias de los pasos de la
+        Procesión Infantil desde 1960, las religiosas de clausura son parte
+        esencial de esta tradición y del alma espiritual de la ciudad.
+      </p>
+    </div>
+  </section>
+
+  <!-- Santa Clara -->
+  <section class={styles.clara}>
+    <div class:list={["container", styles.claraGrid]}>
+      <div class={styles.claraFigure}>
+        <Image
+          src={santaClara}
+          alt="Imagen de Santa Clara de Asís"
+          widths={[320, 520, 700]}
+          sizes="(min-width: 900px) 22rem, 80vw"
+        />
+      </div>
+      <div class={styles.claraText}>
+        <p class="eyebrow">Fundadora de la orden</p>
+        <h2>Santa Clara de Asís</h2>
+        <div class="prose-liturgy">
+          <p>
+            Clara de Asís (Asís, 16 de julio de 1194 – 11 de agosto de 1253) fue
+            una religiosa y santa italiana. Seguidora fiel de San Francisco de
+            Asís, con quien fundó la segunda orden franciscana o de las Hermanas
+            Clarisas, se preciaba de llamarse «humilde planta del bienaventurado
+            padre Francisco». Tras abandonar su antigua vida de noble, se
+            estableció en el monasterio de San Damiano el resto de sus días.
+          </p>
+          <p>
+            Fue la primera y única mujer en escribir una regla de vida religiosa
+            para mujeres, que en su contenido y estructura se aleja de las
+            tradicionales reglas monásticas. Sus restos descansan en la cripta de
+            la Basílica de Santa Clara de Asís. Fue canonizada dos años después
+            de su fallecimiento por el papa Alejandro IV.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Historia del monasterio -->
+  <section class:list={[styles.historia, "container"]}>
+    <div class={styles.histHead}>
+      <p class="eyebrow">Reseña histórica</p>
+      <h2>El Protomonasterio de Santa Clara la Real</h2>
+    </div>
+
+    <div class={styles.histGrid}>
+      <div class:list={["prose-liturgy", styles.histText]}>
+        <p>
+          El Monasterio de Santa Clara la Real, en Tunja, fue fundado por el
+          Capitán Don Francisco de Salguero y su esposa Doña Juana Macías de
+          Salguero, españoles, en el año de 1573. No tuvieron hijos y, siendo
+          católicos muy fervorosos, pertenecían a la tercera orden franciscana.
+        </p>
+        <p>
+          Movidos por el Espíritu de Dios, decidieron de mutuo acuerdo separarse
+          para entrar por completo al servicio de Nuestro Señor. El Capitán,
+          encomendero de Mongua, renunció a su cargo y se hizo franciscano en el
+          convento de Tunja fundado en 1550; ella, en su casona, se hizo
+          fundadora del monasterio de religiosas clarisas.
+        </p>
+        <p>
+          Acompañada por el padre Fray Miguel de los Ángeles (O.F.M.), quien le
+          enseñó la observancia monástica durante un año, el 7 de marzo de 1573
+          hizo su profesión en manos del guardián de San Francisco de Tunja, el
+          padre Fray Sebastián de Ocando, y tomó el nombre de <strong>Sor Juana
+          de Jesús</strong>. Quedó así fundado el primer convento de religiosas
+          clarisas del Nuevo Reino de Granada, bajo el amparo del Rey Felipe II y
+          con bula de Su Santidad Gregorio XIII.
+        </p>
+      </div>
+
+      <aside class={styles.primeras}>
+        <h3>Las diez primeras religiosas</h3>
+        <ol>
+          {primerasReligiosas.map((r) => <li>{r}</li>)}
+        </ol>
+      </aside>
+    </div>
+
+    <div class={styles.histGallery}>
+      <Image src={monasterio1} alt="Monasterio de Santa Clara la Real de Tunja" widths={[300, 500]} sizes="(min-width:720px) 30vw, 90vw" />
+      <Image src={monasterio2} alt="Interior del Monasterio de Santa Clara" widths={[300, 500]} sizes="(min-width:720px) 30vw, 90vw" />
+      <Image src={monasterio3} alt="Detalle del Monasterio de Santa Clara" widths={[300, 500]} sizes="(min-width:720px) 30vw, 90vw" />
+    </div>
+  </section>
+
+  <!-- Homenaje -->
+  <section class={styles.homenaje}>
+    <div class:list={["container", styles.homenajeGrid]}>
+      <div class={styles.homFigure}>
+        <Image
+          src={papaFrancisco}
+          alt="Papa Francisco"
+          widths={[280, 420]}
+          sizes="(min-width: 900px) 18rem, 60vw"
+        />
+      </div>
+      <div class={styles.homText}>
+        <p class="eyebrow" style="color:var(--color-gold-soft)">Gracias, Señor, por haberlo creado</p>
+        <h2>En memoria del Papa Francisco</h2>
+        <div class="prose-liturgy">
+          <p>
+            Como contemplativas, experimentamos el dolor por haber perdido a un
+            padre que con especial solicitud cuidó de nosotras, manifestándonos
+            su cariño en sus visitas y encuentros con la vida consagrada, y
+            exhortándonos a vivir con radicalidad nuestro carisma para ser corazón
+            que sostiene y revitaliza a la Iglesia a través de la oración.
+          </p>
+          <p>
+            Este es un momento de tristeza, pero también de acción de gracias a
+            Dios por el testimonio del Papa Francisco: por su bondad, cercanía,
+            minoridad y pobreza. Desde su ser jesuita, pudimos ver siempre lo
+            concreto del carisma franciscano.
+          </p>
+          <blockquote>
+            «Gracias, Señor, porque me creaste con amor a tu hora exacta; gracias
+            porque me llamaste, gracias porque me creaste. Gracias».
+          </blockquote>
+          <p class={styles.firma}>— Hermanas Clarisas, Monasterio de Tunja</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

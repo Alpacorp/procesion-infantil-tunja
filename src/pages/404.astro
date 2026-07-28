@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import styles from "./404.module.css";
+---
+
+<Layout title="Página no encontrada" description="La página que buscas no existe.">
+  <section class={styles.notfound}>
+    <div class={styles.sunburstWrap} aria-hidden="true"><div class="sunburst"></div></div>
+    <div class={styles.nfInner}>
+      <p class="eyebrow" style="color:var(--color-gold-soft)">Error 404</p>
+      <h1>Esta página se ha extraviado</h1>
+      <p class={styles.nfText}>
+        Puede que el enlace haya cambiado o que la página ya no exista. Te
+        invitamos a regresar al inicio.
+      </p>
+      <a href="/" class="btn btn-primary">Volver al inicio</a>
+    </div>
+  </section>
+</Layout>

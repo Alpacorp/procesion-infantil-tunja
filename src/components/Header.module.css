@@ -1,0 +1,233 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--color-parchment) 88%, transparent);
+  backdrop-filter: saturate(1.1) blur(10px);
+  border-bottom: 1px solid var(--color-stone-line);
+}
+.bar {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0.6rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Marca */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--color-crimson-deep);
+}
+.brand-mark {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  flex: none;
+}
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.brand-kicker {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.32rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 0.15rem;
+}
+
+/* Nav escritorio */
+.desktop-nav {
+  display: none;
+}
+.desktop-nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+.top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.18s, background 0.18s;
+}
+.top:hover,
+.top.active {
+  color: var(--color-crimson);
+}
+.top.active {
+  box-shadow: inset 0 -2px 0 var(--color-gold);
+}
+.top svg {
+  opacity: 0.6;
+  transition: transform 0.2s;
+}
+
+.has-menu {
+  position: relative;
+}
+.submenu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  min-width: 15rem;
+  background: var(--color-parchment);
+  border: 1px solid var(--color-stone-line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.16s, transform 0.16s, visibility 0.16s;
+}
+/* Puente invisible que cubre el hueco entre el botón y el submenú,
+   para que el hover no se pierda al desplazar el ratón hacia abajo. */
+.submenu::before {
+  content: "";
+  position: absolute;
+  top: -0.6rem;
+  left: 0;
+  right: 0;
+  height: 0.6rem;
+}
+.has-menu:hover .submenu,
+.has-menu:focus-within .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.has-menu:hover .top svg,
+.has-menu:focus-within .top svg {
+  transform: rotate(180deg);
+}
+.submenu li {
+  display: block;
+}
+.submenu a {
+  display: block;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s, color 0.15s;
+}
+.submenu a:hover,
+.submenu a.active {
+  background: var(--color-parchment-2);
+  color: var(--color-crimson);
+}
+
+/* Botón hamburguesa */
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: none;
+  border: 1px solid var(--color-stone-line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--color-crimson-deep);
+  transition: transform 0.25s, opacity 0.2s;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Nav móvil */
+.mobile-nav {
+  border-top: 1px solid var(--color-stone-line);
+  background: var(--color-parchment);
+  padding: 0.5rem 1.25rem 1.5rem;
+  max-height: calc(100dvh - 70px);
+  overflow-y: auto;
+}
+.mobile-nav > ul,
+.mobile-nav ul ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mobile-nav > ul > li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--color-stone-line);
+}
+.mobile-nav a {
+  display: block;
+  padding: 0.6rem 0.25rem;
+  text-decoration: none;
+  color: var(--color-ink);
+  font-size: 1rem;
+}
+.mobile-nav a.active {
+  color: var(--color-crimson);
+  font-weight: 600;
+}
+.mobile-group {
+  display: block;
+  padding: 0.6rem 0.25rem 0.2rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-crimson);
+}
+.mobile-nav ul ul a {
+  padding-left: 1rem;
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 900px) {
+  .desktop-nav {
+    display: block;
+  }
+  .menu-toggle,
+  .mobile-nav {
+    display: none;
+  }
+}

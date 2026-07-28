@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import data from "../data/normatividad.json";
+import styles from "./normatividad.module.css";
+
+// Normaliza etiquetas: minúsculas con inicial mayúscula, respetando siglas.
+const SIGLAS = new Set(["RUT", "RUES", "ESAL", "CCT", "RTE"]);
+const CONECTORES = new Set(["de", "del", "la", "el", "y", "o", "e", "los", "las"]);
+function pretty(label: string): string {
+  return label
+    .split(" ")
+    .map((w, i) => {
+      const up = w.toUpperCase().replace(/\.$/, "");
+      if (SIGLAS.has(up)) return w.toUpperCase();
+      const lower = w.toLowerCase();
+      if (i > 0 && CONECTORES.has(lower)) return lower;
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+    })
+    .join(" ");
+}
+
+const years = data as { year: string; docs: { label: string; file: string; size: number }[] }[];
+---
+
+<Layout
+  title="Normatividad"
+  description="Documentación legal y financiera de la Asociación Procesión Infantil Tunja: estatutos, estados financieros y certificaciones del Régimen Tributario Especial."
+>
+  <PageHeader
+    eyebrow="Transparencia"
+    title="Normatividad"
+    subtitle="Documentación legal, financiera y tributaria de la Asociación, disponible para consulta pública."
+  />
+
+  <section class:list={[styles.norm, "container"]}>
+    <p class={styles.introNote}>
+      Como Entidad Sin Ánimo de Lucro (ESAL) perteneciente al Régimen Tributario
+      Especial, la Asociación pone a disposición de la comunidad sus documentos
+      constitutivos, estados financieros, informes de gestión y certificaciones.
+    </p>
+
+    {
+      years.map((group, gi) => (
+        <details class={styles.year} open={gi === 0}>
+          <summary>
+            <span class={styles.yLabel}>Normatividad Tributaria {group.year}</span>
+            <span class={styles.yCount}>{group.docs.length} documentos</span>
+            <svg class={styles.chev} width="14" height="9" viewBox="0 0 14 9" aria-hidden="true">
+              <path d="M1 1l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </summary>
+          <ul class={styles.docList}>
+            {group.docs.map((d) => (
+              <li>
+                <a href={d.file} target="_blank" rel="noopener" class={styles.doc}>
+                  <svg class={styles.pdf} width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M6 2h8l4 4v16H6z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linejoin="round"
+                    />
+                    <path d="M14 2v4h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                  </svg>
+                  <span class={styles.docLabel}>{pretty(d.label)}</span>
+                  <span class={styles.docSize}>{d.size >= 1024 ? (d.size / 1024).toFixed(1) + " MB" : d.size + " KB"}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ))
+    }
+  </section>
+</Layout>

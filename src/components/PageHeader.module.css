@@ -1,0 +1,44 @@
+.page-header {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-crimson-deep);
+  color: var(--color-parchment);
+  border-bottom: 3px solid var(--color-gold);
+}
+.sunburst-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+.sunburst-wrap :global(.sunburst) {
+  width: min(120%, 44rem);
+  aspect-ratio: 1;
+  opacity: 0.45;
+}
+.ph-inner {
+  position: relative;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 5.5rem) 1.25rem clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
+}
+.ph-eyebrow {
+  color: var(--color-gold-soft);
+  margin: 0 0 1rem;
+}
+.page-header h1 {
+  color: var(--color-parchment);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 600;
+  margin: 0;
+}
+.ph-sub {
+  max-width: 46ch;
+  margin: 1.25rem auto 0;
+  font-size: 1.1rem;
+  color: color-mix(in srgb, var(--color-parchment) 82%, transparent);
+  line-height: 1.6;
+}

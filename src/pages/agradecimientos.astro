@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import styles from "./agradecimientos.module.css";
+
+const grupos = [
+  {
+    titulo: "Autoridades eclesiásticas",
+    items: [
+      "Monseñor Luis Augusto Castro Quiroga, Arzobispo de Tunja",
+      "Comunidad Hermanas Clarisas de Tunja",
+      "Comunidad Padres Dominicos de Tunja",
+      "Comunidad Padres Franciscanos de Tunja",
+      "Parroquia de la Catedral de Tunja",
+      "Parroquia de Santa Bárbara",
+    ],
+  },
+  {
+    titulo: "Autoridades civiles y militares",
+    items: [
+      "Alcaldía Mayor de Tunja",
+      "Despacho de la Gestora Social de Tunja",
+      "Secretaría de Tránsito de Tunja",
+      "Junta Directiva Cámara de Comercio de Tunja",
+      "Comandante de la Policía de Boyacá",
+      "Comandante de la Primera Brigada",
+      "Jefe del Estado Mayor del Ejército",
+    ],
+  },
+  {
+    titulo: "Bandas y academias",
+    items: [
+      "Banda de Músicos y Marcial del Ejército",
+      "Banda Marcial de la Policía",
+      "Academia Patriótica e Mariño",
+      "Bandas de los colegios participantes en la Procesión Infantil",
+    ],
+  },
+  {
+    titulo: "Instituciones y benefactores",
+    items: [
+      "Señora Marthica Caicedo Galindo",
+      "Amparo de Niños",
+      "Liceo Infantil Santa Catalina",
+      "Proactiva Aguas de Tunja — Veolia",
+      "Creamos Publicidad",
+      "Bomberos · Defensa Civil · Cruz Roja · Grupo Scout",
+      "Servigenerales",
+      "Cofradías: Asociados Fundadores, Adherentes y Coordinadores",
+    ],
+  },
+];
+---
+
+<Layout
+  title="Agradecimientos"
+  description="La Asociación Procesión Infantil Tunja agradece a las autoridades, instituciones y benefactores que hacen posible la tradición."
+>
+  <PageHeader
+    eyebrow="Nosotros"
+    title="Agradecimientos"
+    subtitle="La procesión es posible gracias a toda una comunidad"
+  />
+
+  <section class:list={[styles.thanks, "container"]}>
+    <div class={styles.thanksGrid}>
+      {
+        grupos.map((g) => (
+          <div class={styles.thanksCard}>
+            <h2>{g.titulo}</h2>
+            <ul>
+              {g.items.map((it) => (
+                <li>{it}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class={styles.closing}>
+      <div class="rule-diamond" aria-hidden="true">✦</div>
+      <p>A todos, nuestra eterna gratitud.</p>
+    </div>
+  </section>
+</Layout>
