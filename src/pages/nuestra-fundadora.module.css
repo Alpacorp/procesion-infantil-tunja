@@ -8,8 +8,7 @@
   align-items: start;
 }
 .art-figure {
-  position: sticky;
-  top: 6rem;
+  position: static;
 }
 .art-figure :global(img) {
   width: 100%;
@@ -39,5 +38,9 @@
   .art-grid {
     grid-template-columns: 22rem 1fr;
     gap: 3.5rem;
+  }
+  .art-figure {
+    position: sticky;
+    top: 6rem;
   }
 }
