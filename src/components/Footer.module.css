@@ -3,7 +3,6 @@
   overflow: hidden;
   background: var(--color-crimson-deep);
   color: color-mix(in srgb, var(--color-parchment) 82%, transparent);
-  margin-top: 5rem;
 }
 .sunburst-wrap {
   position: absolute;
