@@ -11,6 +11,8 @@ interface Props {
   description?: string;
   image?: string;
   schema?: object | object[];
+  /** Fecha de publicación: marca la página como artículo en Open Graph. */
+  published?: Date;
 }
 
 const {
@@ -18,6 +20,7 @@ const {
   description = site.description,
   image = "/og-image.jpg",
   schema,
+  published,
 } = Astro.props;
 
 const pageTitle = title ? `${title} — ${site.shortName}` : `${site.name}`;
@@ -101,13 +104,15 @@ const schemas = [
     <meta name="theme-color" content="#4a141c" />
 
     <!-- Open Graph / redes -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={published ? "article" : "website"} />
+    {published && <meta property="article:published_time" content={published.toISOString()} />}
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={`${site.shortName} — ${title ?? site.tagline}`} />

@@ -35,8 +35,9 @@ const schema = {
 <Layout
   title={title}
   description={excerpt ?? `${title} — ${site.name}`}
-  image={cover ?? "/og-image.jpg"}
+  image={cover ? `/og/blog/${post.id}.jpg` : "/og-image.jpg"}
   schema={schema}
+  published={date}
 >
   <article>
     <header class={styles.postHead}>

@@ -49,7 +49,7 @@ antiguos del WordPress.
 ## Despliegue
 
 Salida estática lista para Vercel (o cualquier hosting estático). Dominio
-objetivo: `https://procesioninfantiltunja.com`.
+objetivo: `https://www.procesioninfantiltunja.com`.
 
 ## Estado
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://procesioninfantiltunja.com/sitemap-index.xml
+Sitemap: https://www.procesioninfantiltunja.com/sitemap-index.xml
