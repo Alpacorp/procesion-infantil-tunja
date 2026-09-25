@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://procesioninfantiltunja.com",
+  site: "https://www.procesioninfantiltunja.com",
   // Preserva enlaces entrantes del sitio WordPress anterior
   redirects: {
     "/recorrido-visual-historico": "/galeria",

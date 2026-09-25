@@ -7,7 +7,7 @@ export const site = {
   tagline: "La demostración de fe más querida de Tunja",
   description:
     "Asociación que preserva la devoción y tradición católica de la Procesión Infantil del Jueves Santo en Tunja, iniciada por Julita Angulo de Mejía y viva desde 1960.",
-  url: "https://procesioninfantiltunja.com",
+  url: "https://www.procesioninfantiltunja.com",
 };
 
 export const contact = {
